@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王玲 — 创意剪辑师</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23191917'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23F6F5F2' text-anchor='middle'%3E%E7%8E%8B%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<style>
+  :root{
+    --paper:#F6F5F2;
+    --paper-alt:#EEECE7;
+    --ink:#191917;
+    --ink-soft:#3A3934;
+    --muted:#6C6A63;
+    --line:#E2E0D9;
+    --accent:#4A5661;
+    --serif:"Noto Serif SC", "Songti SC", "SimSun", serif;
+    --sans:"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--ink);color:var(--paper);}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;}
+
+  /* ===== 导航 ===== */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(246,245,242,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1080px;margin:0 auto;padding:0 32px;
+    height:68px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-logo{
+    font-family:var(--serif);font-weight:700;letter-spacing:.02em;font-size:20px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .nav-logo .dot{width:7px;height:7px;background:var(--accent);border-radius:50%;}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{
+    font-size:14px;color:var(--ink-soft);letter-spacing:.02em;position:relative;
+    transition:color .2s;
+  }
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--accent);
+    transition:width .28s ease;
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    font-size:14px;padding:8px 18px;border:1px solid var(--ink);border-radius:999px;
+    transition:background .2s,color .2s;
+  }
+  .nav-cta:hover{background:var(--ink);color:var(--paper);}
+
+  /* ===== Hero ===== */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:140px 32px 80px;position:relative;
+    max-width:1080px;margin:0 auto;
+  }
+  .hero-kicker{
+    font-size:13px;letter-spacing:.35em;color:var(--muted);
+    text-transform:uppercase;margin-bottom:40px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .hero-kicker::before{content:"";width:44px;height:1px;background:var(--accent);}
+  .hero h1{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(52px,9vw,120px);line-height:1.04;letter-spacing:-.01em;
+  }
+  .hero h1 .thin{font-weight:400;color:var(--muted);}
+  .hero .intro{
+    margin-top:44px;max-width:520px;color:var(--ink-soft);
+    font-size:17px;
+  }
+  .hero .meta-line{
+    margin-top:28px;display:flex;gap:30px;flex-wrap:wrap;
+    font-size:13px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;
+  }
+  .hero-actions{margin-top:56px;display:flex;gap:16px;align-items:center;}
+  .btn{
+    font-size:14px;letter-spacing:.04em;padding:13px 30px;border-radius:999px;
+    transition:all .2s;cursor:pointer;
+  }
+  .btn-solid{background:var(--ink);color:var(--paper);border:1px solid var(--ink);}
+  .btn-solid:hover{background:var(--accent);border-color:var(--accent);}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink-soft);}
+  .btn-ghost:hover{border-color:var(--ink);color:var(--ink);}
+
+  /* ===== 通用 section ===== */
+  section{scroll-margin-top:68px;}
+  .section-wrap{max-width:1080px;margin:0 auto;padding:120px 32px;}
+  .section-head{display:flex;align-items:baseline;gap:24px;margin-bottom:72px;}
+  .section-head .no{font-family:var(--serif);color:var(--accent);font-size:18px;}
+  .section-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5vw,44px);}
+  .section-head .desc{color:var(--muted);font-size:14px;margin-left:auto;max-width:340px;text-align:right;}
+
+  /* ===== Works ===== */
+  .works{background:var(--paper-alt);}
+  .works .section-wrap{padding-top:88px;}
+  .works-tabs{display:flex;gap:4px;margin-bottom:52px;border-bottom:1px solid var(--line);}
+  .tab-btn{
+    font-size:14px;letter-spacing:.06em;padding:12px 24px;color:var(--muted);
+    cursor:pointer;background:none;border:none;border-bottom:2px solid transparent;
+    font-family:var(--sans);transition:color .2s,border-color .2s;margin-bottom:-1px;
+  }
+  .tab-btn:hover{color:var(--ink);}
+  .tab-btn.active{color:var(--ink);border-bottom-color:var(--accent);}
+  .works-panel{display:none;}
+  .works-panel.active{display:block;}
+  .industry{
+    font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 20px;
+    display:flex;align-items:center;gap:16px;
+  }
+  .industry::after{content:"";flex:1;height:1px;background:var(--line);}
+  .industry-block{margin-bottom:44px;}
+  .industry-block:last-child{margin-bottom:0;}
+  .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .work-card{border:1px solid var(--line);background:var(--paper);overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;}
+  .work-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(25,25,23,.08);}
+  .work-cover{
+    aspect-ratio:16/10;position:relative;display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .work-cover .mono{font-family:var(--serif);font-size:44px;color:#F6F5F2;}
+  .work-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+  .work-card:hover .work-cover img{transform:scale(1.05);}
+  .work-cover .tag-samp{
+    position:absolute;top:14px;right:14px;font-size:10px;letter-spacing:.2em;
+    color:var(--muted);border:1px solid var(--line);padding:3px 8px;border-radius:999px;background:rgba(246,245,242,.85);
+  }
+  .work-meta{padding:20px 24px 24px;}
+  .work-meta .cat{font-size:11px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;}
+  .work-meta h3{font-family:var(--serif);font-weight:600;font-size:20px;margin-top:8px;}
+  .work-meta p{font-size:13px;color:var(--muted);margin-top:6px;}
+
+  /* ===== Contact ===== */
+  .contact .lead{font-family:var(--serif);font-weight:600;font-size:clamp(28px,5vw,44px);max-width:760px;line-height:1.3;}
+  .contact .lead .accent{color:var(--accent);}
+  .contact-row{margin-top:56px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+  .contact .channels{margin-top:48px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);}
+  .channel{padding:26px 24px;border-right:1px solid var(--line);}
+  .channel:last-child{border-right:none;}
+  .channel .k{font-size:11px;letter-spacing:.25em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;}
+  .channel .v{font-family:var(--serif);font-size:18px;}
+  .channel a:hover{color:var(--accent);}
+
+  /* ===== Footer ===== */
+  .footer{border-top:1px solid var(--line);padding:40px 32px;}
+  .footer-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+  .footer .copy{font-size:13px;color:var(--muted);}
+  .footer .back-top{font-size:13px;color:var(--ink-soft);border-bottom:1px solid var(--line);cursor:pointer;transition:color .2s;}
+  .footer .back-top:hover{color:var(--accent);border-color:var(--accent);}
+
+  /* ===== 视频弹窗 ===== */
+  .modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:28px;}
+  .modal.open{display:flex;}
+  .modal-mask{position:absolute;inset:0;background:rgba(25,25,23,.88);cursor:pointer;}
+  .modal-box{position:relative;max-width:min(980px,94vw);width:100%;background:#000;border-radius:6px;overflow:hidden;}
+  .modal-box video{width:100%;display:block;max-height:84vh;}
+  .modal-close{
+    position:absolute;top:12px;right:14px;z-index:3;width:38px;height:38px;
+    background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:50%;
+    font-size:24px;line-height:1;cursor:pointer;transition:background .2s;
+  }
+  .modal-close:hover{background:rgba(255,255,255,.28);}
+
+  /* ===== 响应式 ===== */
+  @media (max-width:820px){
+    .nav-links a{display:none;}
+    .nav-cta{display:none;}
+    .hero{padding:120px 24px 60px;}
+    .hero .meta-line{font-size:14px;}
+    .section-wrap{padding:80px 24px;}
+    .section-head{flex-wrap:wrap;gap:14px;}
+    .section-head .desc{margin-left:0;text-align:left;max-width:100%;}
+    .works-grid{grid-template-columns:1fr;}
+    .contact .channels{grid-template-columns:1fr;}
+    .channel{border-right:none;border-bottom:1px solid var(--line);}
+    .channel:last-child{border-bottom:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .work-card{transition:none;}
+    .nav-links a::after{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 导航 ===== -->
+<nav class="nav" id="top">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo"><span class="dot"></span>王玲</a>
+    <div class="nav-links">
+      <a href="#works">作品</a>
+    
+      <a href="#contact" class="nav-cta">联系</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== 代表作品 ===== -->
+<section id="works" class="works">
+  <div class="section-wrap">
+    <div class="section-head">
+      <span class="no">01</span>
+      <h2>案例作品</h2>
+      <p class="desc">AI / IP / 效果广告均为真实项目。</p>
+    </div>
+
+    <div class="works-tabs" role="tablist">
+      <button class="tab-btn active" data-tab="ai" role="tab">AI 作品</button>
+      <button class="tab-btn" data-tab="ip" role="tab">IP 作品</button>
+      <button class="tab-btn" data-tab="effect" role="tab">效果广告</button>
+    </div>
+
+    <!-- AI 作品 -->
+    <div class="works-panel active" data-panel="ai" role="tabpanel">
+      <div class="works-grid">
+        <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/4GnttHsUmI"><div class="work-cover"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/FQDlbOmttoxW2fxfYCucXxA3nRh" alt="广州保利海韵混剪"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">AI 混剪 · 2026</div><h3>广州保利海韵 · 混剪</h3><p>房产项目 AI 混剪 · Seedance 2.0</p></div></a>
+        <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/HReHkU7r3w"><div class="work-cover"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/K9mhbz9nFotQSIxdNRfc3clMnEH" alt="保利岭南瑧悦混剪"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">AI 混剪 · 2026</div><h3>保利岭南瑧悦 · 混剪</h3><p>房产项目 AI 混剪 · Seedance 2.0</p></div></a>
+        <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/GGjqfPaybu"><div class="work-cover"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/XTCibSzSgorGDcx63njcSJH5nng" alt="保利岭南瑧悦混剪03"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">AI 混剪 · 2026</div><h3>保利岭南瑧悦 · 混剪 </h3><p>房产项目 AI 混剪 · Seedance 2.5</p></div></a>
+        <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/uWABe6VC22"><div class="work-cover"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/OjgybUOH9oVJ0fxho7Tc66CcnRg" alt="小米YU7混剪"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">AI 混剪 · 2026</div><h3>小米 YU7 · 混剪</h3><p>汽车项目 AI 混剪 · Seedance 2.0</p></div></a>
+        <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/srEEUI8UKI"><div class="work-cover"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/ElpzbRHo0ou1cpx5VPwcq4sHn8b" alt="舒达AI口播混剪"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">AI 混剪 · 2026</div><h3>舒达 · 混剪</h3><p>家居项目 AI 口播混剪 · Seedance 2.0</p></div></a>
+      </div>
+    </div>
+
+    <!-- IP 作品 -->
+    <div class="works-panel" data-panel="ip" role="tabpanel">
+      <div class="works-grid">
+        <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/6lH9Jz8V34"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/uU2IHmo3Ct" alt="房房实拍素媚"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">IP 实拍 · 2023</div><h3>房房 · 实拍｜素媚</h3><p>探房 IP 实拍 · 2023</p></div></a>
+        <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/QP0PSQU0Uj"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/erfoEEO9Ql" alt="房房实拍铂霖"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">IP 实拍 · 2023</div><h3>房房 · 实拍｜铂霖</h3><p>探房 IP 实拍 · 2023</p></div></a>
+        <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/EnoRfLBhBP"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/LcJzleQHuY" alt="房房探不停实拍16"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">IP 实拍 · 2023</div><h3>房房探不停 · 实拍｜素媚×苏涵</h3><p>探房 IP 实拍 · 2023</p></div></a>
+      </div>
+    </div>
+
+    <!-- 效果广告 -->
+    <div class="works-panel" data-panel="effect" role="tabpanel">
+      <div class="industry-block">
+        <div class="industry">房产</div>
+        <div class="works-grid">
+          <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/wrkUpJTZyJ"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/FaP2L1ImX9" alt="佛山保利实拍"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">房产 · 实拍</div><h3>佛山保利 · 实拍</h3><p>楼盘实拍 · 效果广告</p></div></a>
+          <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/kUsIZlMusz"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/PKncd3EtBC" alt="万科大都会滨江实拍"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">房产 · 实拍</div><h3>万科大都会滨江 · 实拍</h3><p>楼盘实拍 · 效果广告</p></div></a>
+          <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/UK1yncoM2E"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/aYaYOVjt3g" alt="新世界凯粤湾实拍"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">房产 · 实拍</div><h3>新世界凯粤湾 · 实拍</h3><p>楼盘实拍 · 效果广告</p></div></a>
+        </div>
+      </div>
+      <div class="industry-block">
+        <div class="industry">家居</div>
+        <div class="works-grid">
+          <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/USrCVr5nhr"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/bhFckbJ4Vz" alt="悦智智能床混剪"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">家居 · AI 混剪</div><h3>悦智智能床 · 混剪｜金可儿</h3><p>智能床卖点 AI 混剪 · 效果广告</p></div></a>
+          <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/IrhmNUpxWU"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/2IGezgq0RX" alt="天坛整装混剪"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">家居 · 混剪</div><h3>天坛整装 · 混剪</h3><p>整装案例混剪 · 效果广告</p></div></a>
+          <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/3hiLLPQTYV"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/NK43qrUKxW" alt="悦智Pro智能床实拍"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">家居 · 实拍</div><h3>悦智 Pro 智能床 · 实拍</h3><p>智能床实拍 · 情景话题</p></div></a>
+        </div>
+      </div>
+      <div class="industry-block">
+        <div class="industry">汽车</div>
+        <div class="works-grid">
+          <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/NhGV6PBqI0"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/4UC1iZIEKw" alt="风神L8宣传"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">汽车 · 宣传</div><h3>风神 L8 · 宣传</h3><p>车型宣传 · 效果广告</p></div></a>
+          <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/ytMSt5Tayt"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/NtbSSPaUB5" alt="阿维塔06T实拍"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">汽车 · 实拍</div><h3>阿维塔 06T · 实拍</h3><p>车型实拍 · 效果广告</p></div></a>
+          <a class="work-card playable" data-video="https://aka.doubaocdn.com/s/tvhJJvxdIV"><div class="work-cover"><img src="https://aka.doubaocdn.com/s/O4GvGZcixw" alt="阿维塔06混剪"><span class="tag-samp">播放</span></div><div class="work-meta"><div class="cat">汽车 · 混剪</div><h3>阿维塔 06 · 混剪</h3><p>车型混剪 · 效果广告</p></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 联系方式 ===== -->
+<section id="contact" class="contact">
+  <div class="section-wrap">
+    <div class="section-head">
+      <span class="no">02</span>
+      <h2>联系</h2>
+    </div>
+    <p class="desc">  </p>
+    <div class="channels">
+      <div class="channel"><div class="k">姓名</div><div class="v">王玲</div></div>
+      <div class="channel"><div class="k">电话</div><div class="v"><a href="tel:15281075301">15281075301</a></div></div>
+      <div class="channel"><div class="k">邮箱</div><div class="v"><a href="mailto:1046242979@qq.com">1046242979@qq.com</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="copy">© 2026 王玲 · 剪辑师 </span>
+    <span class="back-top" data-top>回到顶部 ↑</span>
+  </div>
+</footer>
+
+<!-- ===== 视频播放弹窗 ===== -->
+<div class="modal" id="videoModal" aria-hidden="true">
+  <div class="modal-mask" data-close></div>
+  <div class="modal-box">
+    <button class="modal-close" data-close aria-label="关闭">×</button>
+    <video id="modalVideo" controls playsinline></video>
+  </div>
+</div>
+
+<script>
+  // 平滑回到顶部
+  document.querySelector('.back-top').addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // 作品分类切换
+  var tabs = document.querySelectorAll('.tab-btn');
+  var panels = document.querySelectorAll('.works-panel');
+  tabs.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      tabs.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var target = btn.getAttribute('data-tab');
+      panels.forEach(function(p){
+        p.classList.toggle('active', p.getAttribute('data-panel') === target);
+      });
+    });
+  });
+
+  // 视频播放弹窗
+  var modal = document.getElementById('videoModal');
+  var modalVideo = document.getElementById('modalVideo');
+  document.querySelectorAll('.playable').forEach(function(card){
+    card.addEventListener('click', function(e){
+      e.preventDefault();
+      modalVideo.src = card.getAttribute('data-video');
+      modal.classList.add('open');
+      modalVideo.play().catch(function(){});
+    });
+  });
+  document.querySelectorAll('[data-close]').forEach(function(el){
+    el.addEventListener('click', closeVideo);
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeVideo();
+  });
+  function closeVideo(){
+    modal.classList.remove('open');
+    modalVideo.pause();
+    modalVideo.removeAttribute('src');
+    modalVideo.load();
+  }
+</script>
+</body>
+</html>
